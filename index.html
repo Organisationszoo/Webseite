@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Organisationszoo – Coaching, Workshops, Shop & Metaphern</title>
+  <meta name="description" content="Führungscoaching & Teamentwicklung – Workshops, Fragebogen, Shop, Team und Tier‑Metaphern. Modern, mobilfreundlich und professionell." />
+
+  <style>
+    /* ====== Design Tokens ====== */
+    :root{
+      --brand:#E44A00;                /* Hauptfarbe */
+      --bg:#ffffff;                   /* Hintergrund (Light) */
+      --text:#111111;                 /* Text (Light) */
+      --muted:#6b7280;                /* Sekundärtext */
+      --card:#ffffff;                 /* Kartenhintergrund */
+      --border:#e5e7eb;               /* Linien/Border */
+      --shadow:0 10px 20px rgba(0,0,0,.05),0 6px 6px rgba(0,0,0,.03);
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0b0f;                 /* Hintergrund (Dark) */
+        --text:#e5e7eb;               /* Text (Dark) */
+        --muted:#9ca3af;
+        --card:#111318;               /* Karten (Dark) */
+        --border:#1f2430;
+        --shadow:0 10px 20px rgba(0,0,0,.40),0 6px 6px rgba(0,0,0,.25);
+      }
+    }
+
+    /* ====== Base ====== */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; line-height:1.6;
+      font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:var(--bg); color:var(--text);
+    }
+    ::selection{ background: color-mix(in srgb, var(--brand) 35%, transparent); color:#fff; }
+    a{color:inherit; text-decoration:none}
+    a.link{color:var(--brand); font-weight:600}
+    img{max-width:100%; height:auto; display:block}
+    .container{width:min(1100px,92%); margin-inline:auto}
+    [id]{scroll-margin-top:84px}
+
+    /* ====== Utilities ====== */
+    .btn{display:inline-flex; align-items:center; gap:.55rem; padding:.78rem 1rem; border-radius:12px; font-weight:700; border:1px solid transparent; cursor:pointer; transition:.2s transform ease,.2s background ease,.2s color ease,.2s border ease}
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:var(--brand); color:#fff}
+    .btn-outline{background:transparent; border-color:var(--border); color:var(--text)}
+    .chip{display:inline-block; padding:.28rem .6rem; border-radius:999px; background:color-mix(in srgb, var(--brand) 12%, transparent); color:var(--brand); border:1px solid color-mix(in srgb, var(--brand) 35%, var(--border)); font-size:.85rem}
+    .muted{color:var(--muted)}
+    .grid{display:grid; gap:1.2rem}
+    .grid-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+    @media (max-width:900px){ .grid-2, .grid-3{grid-template-columns:1fr} }
+    .card{background:var(--card); border:1px solid var(--border); border-radius:18px; box-shadow:var(--shadow); overflow:hidden}
+    .card-pad{padding:1.2rem}
+    .section{padding:3.5rem 0}
+    .section h2{font-size:clamp(1.4rem,1.2rem + 1vw,2rem); margin:0 0 .75rem}
+    .section p{margin:.25rem 0 .75rem}
+    .lead{font-size:clamp(1.1rem, 1rem + .4vw, 1.35rem)}
+    .spacer{height:1px; background:var(--border); margin:2rem 0}
+
+/* ====== Header / Navigation ====== */
+header {
+  position: fixed;        /* immer oben sichtbar */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+/* Platz unter fixiertem Header */
+body {
+  padding-top: 80px; /* kompakter, vorher 110px */
+}
+
+/* Navigation Container */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 0.4rem 0; /* kompakter Abstand oben/unten */
+}
+
+/* Logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.brand img {
+  height: clamp(70px, 6vw, 100px); /* Logo skalierend, max. 100px */
+  width: auto;
+}
+.brand .title {
+  display: none;
+}
+
+/* Navigation Links (Desktop) */
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+.navlinks a {
+  position: relative;
+  padding: 0.8rem 1.1rem; /* kompakter als 1rem 1.3rem */
+  border-radius: 10px;
+  font-size: 1.05rem;     /* etwas kleiner für Desktop */
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: color .25s ease;
+}
+.navlinks a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: .4rem;
+  width: 0%;
+  height: 2px;
+  background: var(--brand);
+  transition: width .25s ease;
+}
+.navlinks a:hover {
+  color: var(--brand);
+}
+.navlinks a:hover::after {
+  width: 100%;
+}
+
+/* Dropdown Menü */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  padding: 0.8rem 1.1rem;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--card);
+  min-width: 200px;
+  box-shadow: var(--shadow);
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 100;
+}
+.dropdown-content a {
+  display: block;
+  padding: .7rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+}
+.dropdown-content a:hover {
+  background: color-mix(in srgb, var(--brand) 12%, transparent);
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Dark/Light Mode automatisch */
+@media (prefers-color-scheme: dark) {
+  header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+  }
+  .navlinks a {
+    color: var(--text);
+  }
+}
+
+/* ==========================
+   Mobile Navigation
+   ========================== */
+.nav-toggle {
+  display: none;
+}
+
+@media (max-width: 820px) {
+  .nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand img { height: 70px; }
+
+  .nav-toggle {
+    display: inline-flex;
+    padding: .6rem 1rem;
+    font-size: 1.5rem;
+  }
+
+  .navlinks {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px 0 0 12px;
+    box-shadow: var(--shadow);
+    flex-direction: column;
+    align-items: flex-start;
+    width: 220px;
+    display: none;
+    padding: .5rem 0;
+  }
+  .navlinks.open { display: flex; }
+
+  .navlinks a {
+    padding: 0.9rem 1rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .dropdown-content {
+    position: static;
+    display: none;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+  }
+  .dropdown.open .dropdown-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Untermenüs abheben im Mobile */
+  .navlinks .dropdown-content a {
+    padding-left: 1.8rem;
+    font-size: 0.95rem;
+    background: color-mix(in srgb, var(--brand) 8%, transparent);
+  }
+  .navlinks .dropdown-content a:hover {
+    background: color-mix(in srgb, var(--brand) 20%, transparent);
+  }
+}
+
+/* Bilder im Kombipaket nebeneinander */
+.combo-images {
+  display: flex;
+  gap: .5rem;           /* Abstand zwischen den Bildern */
+  justify-content: center;
+}
+
+.combo-images img {
+  flex: 1 1 50%;        /* beide gleich breit */
+  height: 180px;        /* gleiche Höhe */
+  object-fit: cover;    /* sauber beschnitten */
+  border-radius: 8px;
+}
+
+/* Team-Karten einheitlich ausrichten */
+#team .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#team .card-pad {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#team .card-pad p.muted {
+  margin-top: auto;   /* schiebt den grauen Text nach unten */
+}
+
+/* Team-Bilder im Mobile kleiner darstellen */
+@media (max-width: 820px) {
+  #team .card img {
+    max-width: 260px;   /* maximale Bildbreite */
+    margin: 0 auto;     /* zentrieren */
+    height: auto;       /* Seitenverhältnis behalten */
+  }
+}
+
+/* ================================
+   Tier-Metaphern Layout
+   ================================ */
+#metaphern .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  align-items: stretch;
+}
+
+.metaphor-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+  transition: transform .2s ease, border-color .2s ease;
+}
+.metaphor-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--brand);
+}
+.metaphor-card h3 { margin-top: 0; font-size: 1.15rem; }
+.metaphor-card p {
+  flex-grow: 1;
+  margin: .6rem 0 1rem 0;
+  font-size: .95rem;
+  color: var(--text);
+}
+.metaphor-card .btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* Modal Fenster */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0,0,0,0.6);
+  padding: 2rem;
+}
+.modal-content {
+  background: var(--card);
+  margin: auto;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  box-shadow: var(--shadow);
+  animation: fadeIn .3s ease;
+}
+.modal .close {
+  float: right;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Grid responsive */
+@media (max-width: 1000px) {
+  #metaphern .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 650px) {
+  #metaphern .grid { grid-template-columns: 1fr; }
+}
+
+/* ================================
+   Shop-Karten (Variante B: contain)
+   ================================ */
+#shop .product {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Einzelbild-Produkte */
+#shop .product img {
+  width: 100%;
+  height: 220px;                  /* gleiche Höhe für alle Produktbilder */
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+
+  /* Bild vollständig sichtbar */
+  object-fit: contain;
+  background: #fff;               /* füllt leere Flächen */
+}
+
+/* Kombipaket mit zwei Bildern */
+#shop .combo-images {
+  display: flex;
+  gap: .4rem;
+  width: 100%;
+  height: 220px;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+#shop .combo-images img {
+  flex: 1 1 50%;
+  height: 100%;
+  object-fit: contain;            /* Bild vollständig sichtbar */
+  background: #fff;
+  padding: .3rem;                 /* kleine Abstände */
+  border-radius: 8px;
+}
+
+/* Inhalt der Karten */
+#shop .card-pad {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#shop .card-pad h3,
+#shop .card-pad p {
+  margin-bottom: .6rem;
+}
+
+#shop .price {
+  font-weight: 700;
+  margin-top: auto;           /* schiebt Preis + Button nach unten */
+  margin-bottom: .5rem;
+}
+
+#shop .card-pad a {
+  align-self: stretch;        /* Button volle Breite */
+  text-align: center;
+}
+
+/* ====== Hero ====== */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 2.2rem 0 1.2rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 1.4rem + 2.2vw, 3rem);
+  line-height: 1.1;
+  margin: 0 0 .8rem;
+}
+
+.hero p { margin: 0 0 1.1rem; }
+
+.hero .visual {
+  min-height: 260px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  text-align: center;
+  padding: 1rem;
+
+  /* gestrichelte Umrandung und Hintergrund entfernt */
+  background: none !important;
+  border: none !important;
+}
+
+@media (max-width:920px) {
+  .hero { grid-template-columns: 1fr; }
+}
+    .hero{display:grid; grid-template-columns:1.2fr .8fr; align-items:center; gap:2rem; padding:2.2rem 0 1.2rem}
+    .hero h1{font-size:clamp(1.8rem, 1.4rem + 2.2vw, 3rem); line-height:1.1; margin:0 0 .8rem}
+    .hero p{margin:0 0 1.1rem}
+    .hero .visual{min-height:260px; background:linear-gradient(135deg, color-mix(in srgb, var(--brand) 18%, var(--card)), transparent); border:1px dashed color-mix(in srgb, var(--brand) 55%, var(--border)); border-radius:18px; display:grid; place-items:center; color:var(--muted); text-align:center; padding:1rem}
+    @media (max-width:920px){ .hero{grid-template-columns:1fr} }
+
+/* ====== Service-/Media einheitlich (Bild + Video gleich groß, ohne Rand) ====== */
+.service-media {
+  aspect-ratio: 16/9;     
+  border-radius: 12px;
+  overflow: hidden;       
+  display: block;
+  background: none;       
+  border: none;           
+}
+
+.service-media img,
+.service-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      
+  display: block;
+  border-radius: 12px;
+}
+
+    /* ====== Shop (einfach, ohne Checkout-Logik) ====== */
+    .product{display:grid; grid-template-rows:auto 1fr auto; gap:.6rem}
+    .product img{border-radius:12px; border:1px solid var(--border)}
+    .price{font-weight:800}
+
+    footer{border-top:1px solid var(--border); padding:2rem 0 3rem; color:var(--muted)}
+
+    details{border:1px solid var(--border); border-radius:12px; padding:.9rem 1rem; background:var(--card)}
+    details+details{margin-top:.6rem}
+    summary{cursor:pointer; font-weight:700}
+  </style>
+</head>
+<body>
+  <header>
+  <div class="container nav" role="navigation" aria-label="Hauptnavigation">
+    <a class="brand" href="#start" aria-label="Start">
+      <img src="eule-organisationszoo.png" alt="Eule" class="eule" />
+    </a>
+
+    <!-- Burger Button für Mobile -->
+    <button class="btn btn-outline nav-toggle" id="navToggle" aria-controls="navLinks" aria-expanded="false">
+      ☰ Menü
+    </button>
+
+    <!-- Navigation -->
+    <nav id="navLinks" class="navlinks" aria-label="Primär">
+      <div class="dropdown">
+        <a href="#angebote" class="dropbtn">Angebote ▾</a>
+        <div class="dropdown-content">
+          <a href="#workshops">Workshops</a>
+          <a href="#fragebogen">Fragebogen</a>
+          <a href="#profile">Persönlichkeitsprofile</a>
+        </div>
+      </div>
+
+      <a href="#shop">Shop</a>
+
+      <div class="dropdown">
+        <a href="#ueberuns" class="dropbtn">Über uns ▾</a>
+        <div class="dropdown-content">
+          <a href="#team">Team</a>
+          <a href="#feedback">Feedback</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#ressourcen" class="dropbtn">Ressourcen ▾</a>
+        <div class="dropdown-content">
+          <a href="#media">Media</a>
+          <a href="#metaphern">Metaphern</a>
+        </div>
+      </div>
+
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+  <main>
+    <!-- Hero / Intro -->
+    <section class="container hero section-light" id="start">
+      <div>
+  <h1>Führungscoaching & Teamentwicklung – klar, wirksam, menschlich.</h1>
+
+<p class="lead">
+  Der <span class="brand-text">OrganisationsZoo</span> macht mit Tier-Metaphern sichtbar, wie Menschen im Berufsalltag 
+  handeln und miteinander umgehen. Dadurch werden Verhalten und Rollen verständlicher – und Veränderung leichter.
+</p>
+
+<p>
+  Ob im Coaching, in Workshops oder in Persönlichkeitsprofilen: 
+  die Methode unterstützt Führungskräfte und Teams dabei, klarer zu kommunizieren, 
+  Konflikte konstruktiv zu lösen und Zusammenarbeit nachhaltig zu verbessern.
+</p>
+
+<p class="muted" style="margin-top:.8rem">
+  Entwickelt von <strong>Dr. Arthur Shalley</strong> – Coach, Autor und Begründer des OrganisationsZoos.
+</p>
+
+<div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:1rem">
+  <a href="#workshops" class="btn btn-primary">Angebote ansehen</a>
+  <a href="#fragebogen" class="btn btn-outline">Fragebogen starten</a>
+</div>
+</div>
+
+<!-- Rechts das Bild -->
+<div class="visual">
+  <img src="assets/intro-bild.jpeg" alt="OrganisationsZoo Illustration" style="border-radius:12px; max-width:100%; height:auto;" />
+</div>
+    </section>
+
+    <!-- Workshops / Angebote (Leistungen entfernt) -->
+    <section class="section section-alt" id="workshops">
+  <div class="container">
+    <h2>Workshops & Angebote</h2>
+    <div class="grid grid-2">
+      
+      <!-- Führungscoaching -->
+      <article class="card highlight-card">
+        <div class="card-pad">
+          <h3>Führungscoaching</h3>
+          <p>
+            Im Führungscoaching lernst du, deine Rolle klarer zu sehen und deine Wirkung zu stärken.  
+            Mit Hilfe der Tier-Metaphern des <span class="brand-text">OrganisationsZoos</span> erkennst du,  
+            dass Menschen sehr unterschiedlich handeln und reagieren.  
+            Jede Person braucht eine andere Art von Führung – manchmal klare Ansagen, manchmal mehr Freiraum.  
+            Wir üben gemeinsam, <strong>situativ zu führen</strong>: zu erkennen, wer was braucht, und darauf passend zu reagieren.
+          </p>
+         <div class="service-media" aria-label="Führungscoaching Bild">
+  <img src="assets/fuehrungscoaching.jpeg" 
+       alt="Führungscoaching Beispiel" 
+       style="border-radius:12px; max-width:100%; height:auto;" />
+</div>
+        </div>
+      </article>
+
+      <!-- Teamentwicklung -->
+      <article class="card highlight-card">
+        <div class="card-pad">
+          <h3>Teamentwicklung</h3>
+          <p>
+            In der Teamentwicklung nutzen wir den <span class="brand-text">OrganisationsZoo</span>,  
+            um sichtbar zu machen, wie unterschiedlich Menschen im Team handeln und reagieren.  
+            Manche sind vorsichtig wie die Eule, andere laut wie der Löwe, fleißig wie die Ameise oder verspielt wie der Gibbon.  
+            Gemeinsam lernen wir, die Unterschiede besser zu verstehen, Konflikte konstruktiv anzugehen  
+            und die Stärken jedes Einzelnen so einzusetzen, dass das ganze Team davon profitiert.
+          </p>
+          <div class="service-media" aria-label="Video Teamentwicklung">
+  <video controls width="100%" preload="metadata" poster="assets/images/thumbnail.jpg">
+    <source src="assets/videos/team.mp4" type="video/mp4">
+    Dein Browser unterstützt das Video nicht.
+  </video>
+</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="profile">
+  <div class="container">
+    <h2>Profile & Teams</h2>
+    <p class="lead">
+      Mit den Profilen des <span class="brand-text">OrganisationsZoos</span> erhältst du Einblicke in
+      persönliche Stärken, Fremdwahrnehmungen und Teamkonstellationen.
+    </p>
+
+    <div class="grid grid-2">
+      <!-- Persönlichkeitsprofil -->
+      <article class="card card-pad">
+        <h3>Persönlichkeitsprofil</h3>
+        <p class="muted">Einblick in individuelle Stärken und Verhalten.</p>
+        <a href="pdf/profil-personal.pdf" target="_blank" class="btn btn-primary">
+          PDF öffnen
+        </a>
+      </article>
+
+      <!-- Fremdwahrnehmung -->
+      <article class="card card-pad">
+        <h3>Fremdwahrnehmung</h3>
+        <p class="muted">So wirst du von anderen gesehen.</p>
+        <a href="pdf/profil-fremdwahrnehmung.pdf" target="_blank" class="btn btn-primary">
+          PDF öffnen
+        </a>
+      </article>
+
+      <!-- Dream Team -->
+      <article class="card card-pad">
+        <h3>Dream Team</h3>
+        <p class="muted">Wie sieht dein ideales Team aus?</p>
+        <a href="pdf/profil-dreamteam.pdf" target="_blank" class="btn btn-primary">
+          PDF öffnen
+        </a>
+      </article>
+
+      <!-- Aktuelles Team -->
+      <article class="card card-pad">
+        <h3>Aktuelles Team</h3>
+        <p class="muted">Die aktuelle Zusammensetzung deines Teams.</p>
+        <a href="pdf/profil-aktuelles-team.pdf" target="_blank" class="btn btn-primary">
+          PDF öffnen
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Fragebogen -->
+<section class="section section-light" id="fragebogen">
+  <div class="container">
+    <h2>Fragebogen</h2>
+    <p class="lead">
+      Mit dem Fragebogen erkennst du, welche fünf Verhaltensweisen im <span class="brand-text">OrganisationsZoo</span> 
+      bei dir am stärksten ausgeprägt sind. 
+    </p>
+    <p>
+      So entsteht ein persönliches Profil, das dir zeigt, wie du im Alltag handelst – 
+      und wie andere dein Verhalten wahrnehmen können.
+    </p>
+
+    <div class="card">
+      <div class="card-pad" style="text-align:center">
+        <a href="fragebogen.html"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="btn btn-primary"
+           style="justify-content:center; font-size:1.05rem;">
+          Fragebogen im neuen Tab öffnen
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Shop -->
+<section class="section section-alt" id="shop">
+  <div class="container">
+    <h2>Shop</h2>
+    <p class="muted">Bücher & Metaphernkarten – bestelle direkt per E-Mail.</p>
+    <div class="grid grid-3">
+      
+      <!-- Buch -->
+      <article class="card product">
+        <img src="assets/buch-organisationszoo.jpg" alt="Buch: OrganisationsZoo" />
+        <div class="card-pad">
+          <h3>Buch: OrganisationsZoo</h3>
+          <p class="muted">
+            Verstehe Führungsverhalten mit klaren Tiermetaphern – kompakt, praxisnah und inspirierend.
+          </p>
+          <div class="price">CHF 39.00</div>
+          <div style="height:.6rem"></div>
+          <a class="btn btn-primary" href="mailto:bestellung@organisationszoo.ch?subject=Bestellung%20Buch">
+            Per E-Mail bestellen
+          </a>
+        </div>
+      </article>
+
+      <!-- Metaphernkarten -->
+      <article class="card product">
+        <img src="assets/metapherkarten-organisationszoo.jpg" alt="Metaphernkarten" />
+        <div class="card-pad">
+          <h3>Metaphernkarten</h3>
+          <p class="muted">
+            60 Karten mit Tierbildern – ideal für Workshops, Reflexion und Teamgespräche.
+          </p>
+          <div class="price">CHF 29.00</div>
+          <div style="height:.6rem"></div>
+          <a class="btn btn-primary" href="mailto:bestellung@organisationszoo.ch?subject=Bestellung%20Metaphernkarten">
+            Per E-Mail bestellen
+          </a>
+        </div>
+      </article>
+
+      <!-- Kombipaket -->
+<article class="card product">
+  <div class="combo-images">
+    <img src="assets/buch-organisationszoo.jpg" alt="Buch: OrganisationsZoo" />
+    <img src="assets/metapherkarten-organisationszoo.jpg" alt="Metaphernkarten" />
+  </div>
+  <div class="card-pad">
+    <h3>Kombipaket: Buch + Metaphernkarten</h3>
+    <p class="muted">Ideal zusammen – zum Vorteilspreis</p>
+    <div class="price">CHF 59.00</div>
+    <div style="height:.6rem"></div>
+    <a class="btn btn-primary" href="mailto:bestellung@organisationszoo.ch?subject=Bestellung%20Kombipaket">
+      Per E-Mail bestellen
+    </a>
+  </div>
+</article>
+
+    </div>
+  </div>
+</section>
+
+    </div>
+  </div>
+</section>
+
+    <!-- Team -->
+<section class="section section-light" id="team">
+  <div class="container">
+    <h2>Unser Team</h2>
+    <div class="grid grid-3">
+
+      <!-- Nicole -->
+      <article class="card">
+        <img src="assets/team-nicole.jpg" alt="Nicole Stöcker" style="border-radius:12px;" />
+        <div class="card-pad">
+          <h3>Nicole Stöcker</h3>
+          <p>
+            Nach Stationen in Kalifornien, Hamburg und Zürich gründete Nicole ihre Agentur 
+            <em>konzept + gestaltung</em>. Heute berät sie Unternehmen in Führungsthemen 
+            und begleitet internationale Projekte. Nebenbei bringt sie mit Ausbildungen 
+            als Kinesiologin, Impro-Schauspielerin und Clown eine gute Portion Leichtigkeit ins Business.  
+          </p>
+          <p class="muted">Als Botschafterin des <strong>OrganisationsZoos</strong> machte sie die Metapherkarten international bekannt.</p>
+        </div>
+      </article>
+
+      <!-- Peter -->
+      <article class="card">
+        <img src="assets/team-peter.jpg" alt="Peter Renner" style="border-radius:12px;" />
+        <div class="card-pad">
+          <h3>Peter Renner</h3>
+          <p>
+            Nach 40 Jahren in nationalen und internationalen IT-Projekten gönnte sich Peter 
+            den „Unruhestand“. Ganz losgelassen hat er nie: Als Coach, Autor und Erwachsenenbildner 
+            arbeitet er weiterhin mit Kunden – und findet trotzdem Zeit für Wohnmobil, Motorrad 
+            und Flieger.  
+          </p>
+          <p class="muted">„Ordnen Sie die richtigen Mitarbeiter den richtigen Prozessen zu.“ – sein Motto, das auch der <strong>OrganisationsZoo</strong> unterstützt.</p>
+        </div>
+      </article>
+
+      <!-- Simon -->
+      <article class="card">
+        <img src="assets/team-simon.jpg" alt="Simon Bertogg" style="border-radius:12px;" />
+        <div class="card-pad">
+          <h3>Simon Bertogg</h3>
+          <p>
+            Simon arbeitet seit über 18 Jahren mit Menschen mit kognitiven und körperlichen 
+            Beeinträchtigungen. Als Teamleiter setzt er den <strong>OrganisationsZoo</strong> im 
+            Alltag ein – und verbindet ihn mit den Möglichkeiten künstlicher Intelligenz.  
+          </p>
+          <p class="muted">Er weiß: Wenn Tiere das Verhalten erklären, wird Teamarbeit klarer – und manchmal auch tierisch lustig.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="feedback">
+  <div class="container">
+    <h2>Kundenfeedback</h2>
+    <p class="lead">Das sagen Führungskräfte und Teams über den OrganisationsZoo:</p>
+
+    <!-- Bestehende Kundenstimmen -->
+    <div class="grid grid-3">
+      <article class="card card-pad">
+        <p>„Die Tier-Metaphern haben uns geholfen, Konflikte endlich mit einem Lächeln anzugehen.“</p>
+        <p class="muted">— Martina K., Teamleiterin</p>
+      </article>
+
+      <article class="card card-pad">
+        <p>„Ich habe mein Führungsverhalten klarer erkannt – das Coaching war ein Augenöffner.“</p>
+        <p class="muted">— Thomas R., Geschäftsführer</p>
+      </article>
+
+      <article class="card card-pad">
+        <p>„Unsere Zusammenarbeit ist spürbar besser geworden. Der OrganisationsZoo bleibt bei uns lebendig.“</p>
+        <p class="muted">— Sabine L., Projektleiterin</p>
+      </article>
+    </div>
+
+    <!-- Formular für neues Feedback -->
+    <h3 style="margin-top:2rem">Eigenes Feedback geben</h3>
+    <form action="mailto:info@organisationszoo.ch?subject=Kundenfeedback%20OrganisationsZoo" 
+          method="post" enctype="text/plain" 
+          class="card card-pad" style="max-width:600px; margin:auto;">
+      
+      <label for="name">Name (optional)</label>
+      <input type="text" id="name" name="Name" 
+             style="width:100%; padding:.6rem; margin:.4rem 0 1rem; border-radius:8px; border:1px solid var(--border);">
+
+      <label for="email">E-Mail (optional, für Rückfragen)</label>
+      <input type="email" id="email" name="E-Mail" 
+             style="width:100%; padding:.6rem; margin:.4rem 0 1rem; border-radius:8px; border:1px solid var(--border);">
+
+      <label for="feedback">Dein Feedback</label>
+      <textarea id="feedback" name="Feedback" rows="5" 
+                style="width:100%; padding:.6rem; margin:.4rem 0 1rem; border-radius:8px; border:1px solid var(--border);"></textarea>
+
+      <button type="submit" class="btn btn-primary">Feedback senden</button>
+    </form>
+  </div>
+</section>
+
+<section class="section section-light" id="media">
+  <div class="container">
+    <h2>Media & Social</h2>
+    <p class="lead">Lass dich inspirieren – Vorträge, Podcasts & Beiträge:</p>
+
+<div class="grid grid-3">
+  <a href="https://soundcloud.com/organisationszoo" target="_blank" class="card card-pad">
+    <h3>🎵 SoundCloud</h3>
+    <p class="muted">Podcasts & Audio-Impulse</p>
+  </a>
+      <a href="https://www.youtube.com/channel/UCJKIi8yv_DDxixOr7dDb4BA" target="_blank" class="card card-pad">
+        <h3>▶️ YouTube</h3>
+        <p class="muted">Workshops & Talks</p>
+      </a>
+      <a href="https://www.linkedin.com/in/simon-bertogg-849328372/" target="_blank" class="card card-pad">
+        <h3>💼 LinkedIn</h3>
+        <p class="muted">Neuigkeiten & Fachartikel</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Metaphern: Tiere humorvoll -->
+<section class="section section-alt" id="metaphern">
+  <div class="container">
+    <h2>Tier-Metaphern</h2>
+    <p class="muted">
+      Jedes Tier erzählt eine kleine Geschichte – eine Metapher für Verhalten im Team. 
+      Klick auf „Mehr erfahren“, um die Beschreibung zu sehen.
+    </p>
+
+    <!-- Grid mit Karten -->
+    <div class="grid">
+      <!-- Ameise -->
+      <article class="card card-pad metaphor-card">
+        <h3>🐜 Ameise</h3>
+        <p class="muted">Immer fleißig und geschäftig unterwegs …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-ameise">Mehr erfahren</button>
+      </article>
+
+      <!-- Biene -->
+      <article class="card card-pad metaphor-card">
+        <h3>🐝 Biene</h3>
+        <p class="muted">Bringt Struktur und süße Ergebnisse …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-biene">Mehr erfahren</button>
+      </article>
+
+      <!-- Chamäleon -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦎 Chamäleon</h3>
+        <p class="muted">Meister der Anpassung …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-chamaeleon">Mehr erfahren</button>
+      </article>
+
+      <!-- Hund -->
+      <article class="card card-pad metaphor-card">
+        <h3>🐕 Hund</h3>
+        <p class="muted">Immer loyal und begeistert …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-hund">Mehr erfahren</button>
+      </article>
+
+      <!-- Adler -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦅 Adler</h3>
+        <p class="muted">Sieht Chancen in weiter Ferne …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-adler">Mehr erfahren</button>
+      </article>
+
+      <!-- Katze -->
+      <article class="card card-pad metaphor-card">
+        <h3>🐈 Katze</h3>
+        <p class="muted">Geht ihren eigenen Weg …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-katze">Mehr erfahren</button>
+      </article>
+
+      <!-- Gibbon -->
+      <article class="card card-pad metaphor-card">
+        <h3>🐒 Gibbon</h3>
+        <p class="muted">Bringt Leben in die Bude …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-gibbon">Mehr erfahren</button>
+      </article>
+
+      <!-- Hyäne -->
+      <article class="card card-pad metaphor-card">
+        <h3>🟤 Hyäne</h3>
+        <p class="muted">Lacht schrill im Hintergrund …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-hyaene">Mehr erfahren</button>
+      </article>
+
+      <!-- Nützliches Insekt -->
+      <article class="card card-pad metaphor-card">
+        <h3>🪲 Nützliches Insekt</h3>
+        <p class="muted">Unscheinbar, aber unentbehrlich …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-insekt1">Mehr erfahren</button>
+      </article>
+
+      <!-- Lästiges Insekt -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦟 Lästiges Insekt</h3>
+        <p class="muted">Summt immer im falschen Moment …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-insekt2">Mehr erfahren</button>
+      </article>
+
+      <!-- Schakal -->
+      <article class="card card-pad metaphor-card">
+        <h3>🐺 Schakal</h3>
+        <p class="muted">Verteidigt lautstark sein Revier …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-schakal">Mehr erfahren</button>
+      </article>
+
+      <!-- Kind -->
+      <article class="card card-pad metaphor-card">
+        <h3>👶 Kind</h3>
+        <p class="muted">Neugierig und voller Energie …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-kind">Mehr erfahren</button>
+      </article>
+
+      <!-- Löwe -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦁 Löwe</h3>
+        <p class="muted">Brüllt laut und beansprucht die Mitte …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-loewe">Mehr erfahren</button>
+      </article>
+
+      <!-- Maus -->
+      <article class="card card-pad metaphor-card">
+        <h3>🐭 Maus</h3>
+        <p class="muted">Klein und flink im Hintergrund …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-maus">Mehr erfahren</button>
+      </article>
+
+      <!-- Parasit -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦠 Parasit</h3>
+        <p class="muted">Lebt bequem von anderen …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-parasit">Mehr erfahren</button>
+      </article>
+
+      <!-- Eule -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦉 Eule</h3>
+        <p class="muted">Weise Beobachterin im Stillen …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-eule">Mehr erfahren</button>
+      </article>
+
+      <!-- Piranha -->
+      <article class="card card-pad metaphor-card">
+        <h3>🐟 Piranha</h3>
+        <p class="muted">Klein allein, gnadenlos im Schwarm …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-piranha">Mehr erfahren</button>
+      </article>
+
+      <!-- Eiche -->
+      <article class="card card-pad metaphor-card">
+        <h3>🌳 Eiche</h3>
+        <p class="muted">Bietet Schutz und Halt …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-eiche">Mehr erfahren</button>
+      </article>
+
+      <!-- Klapperschlange -->
+      <article class="card card-pad metaphor-card">
+        <h3>🐍 Klapperschlange</h3>
+        <p class="muted">Warnt laut, bevor sie zubeißt …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-schlange">Mehr erfahren</button>
+      </article>
+
+      <!-- Faultier -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦥 Faultier</h3>
+        <p class="muted">Hängt entspannt ab und bewegt sich kaum …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-faultier">Mehr erfahren</button>
+      </article>
+
+      <!-- Dinosaurier -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦖 Dinosaurier</h3>
+        <p class="muted">Stark, aber aus der Zeit gefallen …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-dino">Mehr erfahren</button>
+      </article>
+
+      <!-- Einhorn -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦄 Einhorn</h3>
+        <p class="muted">Glitzert und hebt die Stimmung …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-einhorn">Mehr erfahren</button>
+      </article>
+
+      <!-- Geier -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦅 Geier</h3>
+        <p class="muted">Wartet geduldig, um zuzuschlagen …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-geier">Mehr erfahren</button>
+      </article>
+
+      <!-- Wal -->
+      <article class="card card-pad metaphor-card">
+        <h3>🐋 Wal</h3>
+        <p class="muted">Gigantisch und doch sanft …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-wal">Mehr erfahren</button>
+      </article>
+
+      <!-- Hybrid -->
+      <article class="card card-pad metaphor-card">
+        <h3>🧬 Hybrid</h3>
+        <p class="muted">Von allem ein bisschen …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-hybrid">Mehr erfahren</button>
+      </article>
+
+      <!-- Yak -->
+      <article class="card card-pad metaphor-card">
+        <h3>🦬 Yak</h3>
+        <p class="muted">Stürmt los, voller Energie …</p>
+        <button class="btn btn-outline open-modal" data-target="modal-yak">Mehr erfahren</button>
+    <!-- … alle weiteren Karten hier -->
+    </div><!-- Ende Grid -->
+  </div><!-- Ende Container -->
+
+  <!-- Alle Modals HIER sammeln -->
+  <div id="modal-ameise" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>🐜 Ameise</h3>
+      <p>Immer geschäftig unterwegs, trägt das Zehnfache ihres Gewichts und baut fleißig am großen Ganzen. Doch manchmal merkt sie nicht, dass sie längst im Kreis läuft.</p>
+    </div>
+  </div>
+
+    <div id="modal-biene" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🐝 Biene</h3><p>Summt von Aufgabe zu Aufgabe, verbindet alle im Team und sorgt für süße Ergebnisse. Wenn’s zu viel wird, setzt sie aber auch mal den Stachel ein.</p></div></div>
+
+    <div id="modal-chamaeleon" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🦎 Chamäleon</h3><p>Kaum schaut man hin, ist es schon eine andere Farbe. Meister der Anpassung – doch manchmal weiß man nicht mehr, was nun echt ist.</p></div></div>
+
+    <div id="modal-hund" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🐕 Hund</h3><p>Immer loyal, immer begeistert, immer dabei. Rennt voller Freude los – auch wenn noch niemand „Los!“ gesagt hat.</p></div></div>
+
+    <div id="modal-adler" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🦅 Adler</h3><p>Schwebt hoch über allem, hat den Überblick und entdeckt Chancen in weiter Ferne. Vergisst nur manchmal, dass am Boden auch Arbeit wartet.</p></div></div>
+
+    <div id="modal-katze" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🐈 Katze</h3><p>Geht ihren eigenen Weg. Mal schnurrend und charmant, mal kratzbürstig – aber immer mit Stil und Selbstbewusstsein.</p></div></div>
+
+    <div id="modal-gibbon" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🐒 Gibbon</h3><p>Schwingt lachend von Ast zu Ast, bringt Leben in die Bude und macht Quatsch. Doch wehe, jemand will ihn bremsen – dann wird’s laut.</p></div></div>
+
+    <div id="modal-hyaene" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🟤 Hyäne</h3><p>Lacht schrill im Hintergrund, wenn andere straucheln. Geschickt darin, Chancen zu wittern – manchmal aber auch ein bisschen zu listig.</p></div></div>
+
+    <div id="modal-insekt1" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🪲 Nützliches Insekt</h3><p>Klein, unscheinbar, aber ohne es läuft nichts. Bringt Struktur ins Chaos und erledigt still das, woran niemand denkt.</p></div></div>
+
+    <div id="modal-insekt2" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🦟 Lästiges Insekt</h3><p>Summt immer im falschen Moment ins Ohr. Nervt, aber ignorieren kann man es trotzdem nicht.</p></div></div>
+
+    <div id="modal-schakal" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🐺 Schakal</h3><p>Streift laut jaulend durchs Revier, verteidigt seine Gruppe und kämpft leidenschaftlich – auch wenn’s gar nicht nötig wäre.</p></div></div>
+
+    <div id="modal-kind" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>👶 Kind</h3><p>Unvoreingenommen, neugierig und voller Energie. Sieht Möglichkeiten, wo Erwachsene nur Probleme sehen – manchmal aber auch Chaos.</p></div></div>
+
+    <div id="modal-loewe" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🦁 Löwe</h3><p>Brüllt laut, thront majestätisch und beansprucht die Mitte. Mit anpacken? Nur, wenn’s unbedingt sein muss.</p></div></div>
+
+    <div id="modal-maus" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🐭 Maus</h3><p>Klein, flink und fast unsichtbar. Schafft viel im Stillen – doch wehe, man scheucht sie auf, dann flitzt sie kopflos davon.</p></div></div>
+
+    <div id="modal-parasit" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🦠 Parasit</h3><p>Lässt andere schuften und lebt bequem mit. Bringt selten Eigenleistung – aber erstaunlich lange überlebt er trotzdem.</p></div></div>
+
+    <div id="modal-eule" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🦉 Eule</h3><p>Sitzt still, beobachtet und wartet, bis alle ausgeredet haben. Dann sagt sie einen Satz – und trifft den Nagel auf den Kopf.</p></div></div>
+
+    <div id="modal-piranha" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🐟 Piranha</h3><p>Allein klein und unscheinbar, im Schwarm jedoch gnadenlos. Stürzt sich blitzschnell auf jede Gelegenheit – und hinterlässt Spuren.</p></div></div>
+
+    <div id="modal-eiche" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🌳 Eiche</h3><p>Steht fest verwurzelt, bietet Schutz und Halt. Doch wehe, ein Sturm kommt – dann knackt es gewaltig.</p></div></div>
+
+    <div id="modal-schlange" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🐍 Klapperschlange</h3><p>Warnt lautstark, bevor sie zubeißt. Jeder hört sie – und genau das will sie auch.</p></div></div>
+
+    <div id="modal-faultier" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🦥 Faultier</h3><p>Hängt gemütlich ab, bewegt sich nur, wenn’s unbedingt sein muss. Nervt die Hektischen – erinnert aber an das Wichtigste: Ruhe.</p></div></div>
+
+    <div id="modal-dino" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🦖 Dinosaurier</h3><p>Beeindruckend groß und stark, aber in einer Welt, die sich längst verändert hat. Kämpft tapfer gegen das Aussterben – meistens vergeblich.</p></div></div>
+
+    <div id="modal-einhorn" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🦄 Einhorn</h3><p>Funkelt, glitzert und verkörpert das Unmögliche. Hebt die Stimmung – solange es nicht zu sehr abhebt.</p></div></div>
+
+    <div id="modal-geier" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🦅 Geier</h3><p>Wartet geduldig, bis andere fertig sind – und schlägt dann zu. Unangenehm, aber überlebenswichtig im Ökosystem.</p></div></div>
+
+    <div id="modal-wal" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🐋 Wal</h3><p>Gigantisch und doch sanft. Bewegt sich gemächlich durch die Tiefen, und wenn er auftaucht, staunen alle.</p></div></div>
+
+    <div id="modal-hybrid" class="modal"><div class="modal-content"><span class="close">&times;</span><h3>🧬 Hybrid</h3><p>Von allem ein bisschen, nie ganz festgelegt. Überraschend vielseitig – oder einfach schwer einzuordnen.</p></div></div>
+
+<!-- Modal Yak -->
+<div id="modal-yak" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>🦬 Yak</h3>
+    <p>Stürmt los, voller Energie und Freude. Stolpert manchmal über die eigenen Hufe, rappelt sich aber sofort wieder auf.</p>
+  </div>
+</div>
+</section><!-- Ende Section Metaphern -->
+
+<!-- Kontakt -->
+<section class="section section-light" id="kontakt">
+  <div class="container grid grid-2">
+    <div>
+      <h2>Kontakt</h2>
+      <p>Schreib uns für ein unverbindliches Gespräch.</p>      <form class="card card-pad" onsubmit="event.preventDefault(); alert('Danke! Wir melden uns.');">
+        <label>Ihr Name<br>
+          <input required type="text" name="name" placeholder="Vor- und Nachname"
+            style="width:100%; padding:.7rem; border-radius:10px; border:1px solid var(--border);
+                   background:var(--card); color:var(--text); accent-color:var(--brand)">
+        </label>
+        <div style="height:.8rem"></div>
+        <label>E-Mail<br>
+          <input required type="email" name="email" placeholder="name@firma.ch"
+            style="width:100%; padding:.7rem; border-radius:10px; border:1px solid var(--border);
+                   background:var(--card); color:var(--text); accent-color:var(--brand)">
+        </label>
+        <div style="height:.8rem"></div>
+        <label>Nachricht<br>
+          <textarea rows="5" name="message" placeholder="Worum geht es?"
+            style="width:100%; padding:.7rem; border-radius:10px; border:1px solid var(--border);
+                   background:var(--card); color:var(--text)"></textarea>
+        </label>
+        <div style="height:1rem"></div>
+        <button class="btn btn-primary" type="submit">Senden</button>
+      </form>
+    </div>
+
+    <div>
+      <h3>Adresse</h3>
+      <p class="muted">Hier eure Firmenadresse und Social Links ergänzen.</p>
+      <ul>
+        <li>E-Mail: <a class="link" href="mailto:info@organisationszoo.ch">info@organisationszoo.ch</a></li>
+        <li>Telefon: <a class="link" href="tel:+41">+41 43 288 53 83</a></li>
+        <li>LinkedIn: <a class="link" href="#">Profil</a></li>
+      </ul>
+      <div class="spacer"></div>
+      <h3>FAQ</h3>
+      <details>
+        <summary>Wie läuft ein Erstgespräch ab?</summary>
+        <p>Wir klären Ziele, Rahmen & next steps. Unverbindlich & kostenlos.</p>
+      </details>
+      <details>
+        <summary>Führt ihr Workshops auch vor Ort durch?</summary>
+        <p>Ja – in der ganzen Schweiz, auf Deutsch und Englisch.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:center">
+      <small>© <span id="year"></span> Organisationszoo. Alle Rechte vorbehalten.</small>
+      <div style="display:flex; gap:.6rem; align-items:center">
+        <a href="#" class="muted">Impressum</a>
+        <a href="#" class="muted">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Modal Script -->
+<script>
+  document.querySelectorAll(".open-modal").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.getAttribute("data-target");
+      document.getElementById(target).style.display = "block";
+    });
+  });
+
+  document.querySelectorAll(".modal .close").forEach(span => {
+    span.addEventListener("click", () => {
+      span.closest(".modal").style.display = "none";
+    });
+  });
+
+  window.addEventListener("click", e => {
+    if (e.target.classList.contains("modal")) {
+      e.target.style.display = "none";
+    }
+  });
+</script>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks  = document.getElementById('navLinks');
+
+  // Menü komplett schließen
+  function closeMenu() {
+    navLinks.classList.remove('open');
+    navToggle?.setAttribute('aria-expanded', 'false');
+    document.querySelectorAll('.dropdown.open')
+      .forEach(d => d.classList.remove('open'));
+  }
+
+  // Burger auf/zu
+  navToggle?.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (!open) closeMenu();
+  });
+
+  // Klicks im Menü
+  navLinks?.addEventListener('click', (e) => {
+    if (window.innerWidth > 820) return; // nur mobil
+
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    // Dropbtn → Untermenü toggeln
+    if (link.classList.contains('dropbtn')) {
+      e.preventDefault();
+      const parent = link.parentElement;
+      const isOpen = parent.classList.contains('open');
+      document.querySelectorAll('.dropdown.open')
+        .forEach(d => d.classList.remove('open'));
+      if (!isOpen) parent.classList.add('open');
+      return;
+    }
+
+    // Alle anderen Links → Menü komplett schließen
+    closeMenu();
+  });
+
+  // Klick außerhalb Header → Menü zu (mobil)
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth > 820) return;
+    if (!e.target.closest('header')) closeMenu();
+  });
+
+  // Reset bei Resize (zurück auf Desktop)
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 820) closeMenu();
+  });
+
+</script>
+</body>
+</html>

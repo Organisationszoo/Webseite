@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Peter Renner – OrganisationsZoo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --brand:#E44A00;
+      --bg:#ffffff;
+      --text:#111111;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --shadow:0 6px 18px rgba(0,0,0,.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:#0b0b0f;
+        --text:#e5e7eb;
+        --muted:#9ca3af;
+        --card:#111318;
+        --border:#1f2430;
+        --shadow:0 6px 18px rgba(0,0,0,.45);
+      }
+    }
+
+    body { margin:0; font:16px/1.6 system-ui, sans-serif; background:var(--bg); color:var(--text); }
+    img { max-width:100%; display:block; }
+    h1,h2,h3 { margin-top:0; }
+
+    .profile-header {
+      text-align:center;
+      background:var(--card);
+      padding:2.5rem 1rem 2rem;
+      border-bottom:4px solid var(--brand);
+      box-shadow:var(--shadow);
+    }
+    .profile-header img {
+      border-radius:50%;
+      width:160px; height:160px;
+      object-fit:cover;
+      margin-bottom:1rem;
+      box-shadow:0 4px 12px rgba(0,0,0,.15);
+    }
+    .profile-header h1 {
+      font-size:clamp(1.6rem,1.2rem + 2vw,2.2rem);
+      margin:.2rem 0;
+    }
+    .profile-header p {
+      margin:0;
+      color:var(--muted);
+    }
+
+    .profile-content {
+      max-width:800px;
+      margin:2rem auto;
+      padding:1.5rem;
+      background:var(--card);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+    .profile-content h2 { color:var(--brand); margin-bottom:.6rem; font-size:1.3rem; }
+    .profile-content p { margin-bottom:1.2rem; }
+
+    .quote {
+      border-left:4px solid var(--brand);
+      padding-left:1rem;
+      margin:1.5rem 0;
+      font-style:italic;
+      color:var(--muted);
+    }
+
+    .funfacts {
+      display:flex;
+      flex-wrap:wrap;
+      gap:.8rem;
+      margin-top:1.5rem;
+    }
+    .funfacts span {
+      background:color-mix(in srgb, var(--brand) 12%, transparent);
+      color:var(--brand);
+      padding:.4rem .8rem;
+      border-radius:999px;
+      font-size:.9rem;
+      font-weight:600;
+    }
+
+    .back-link {
+      display:inline-block;
+      margin:2rem auto;
+      padding:.8rem 1.4rem;
+      background:var(--brand);
+      color:#fff;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      transition:background .3s;
+    }
+    .back-link:hover { background:#c53d00; }
+  </style>
+</head>
+<body>
+  <div class="profile-header">
+    <img src="assets/team-peter.jpg" alt="Peter Renner">
+    <h1>Peter Renner 🦁</h1>
+    <p>Coach, Autor & Botschafter des OrganisationsZoos</p>
+  </div>
+
+  <div class="profile-content">
+    <h2>Mein Weg</h2>
+    <p>
+      Nach vierzig Jahren in nationalen und internationalen Informatikprojekten 
+      habe ich mich 2023 in den Unruhestand begeben. 
+      Mein Engagement als Erwachsenenbildner, das mich Zeit meines Lebens begleitet hat, 
+      nehme ich mit in die Rente.
+    </p>
+    <p>
+      Ich coache nach wie vor internationale Kunden, schreibe Bücher 
+      und versuche genügend Zeit für mein Wohnmobil, Motorrad und UL-Flugstunden zu erübrigen.
+    </p>
+
+    <h2>Leitlinie</h2>
+    <div class="quote">
+      „Ordnen Sie die richtigen Mitarbeiter den richtigen Prozessen zu, 
+      die Sie mit der richtigen Technologie erstellt haben.“  
+      – Colin Boyd
+    </div>
+
+    <h2>OrganisationsZoo</h2>
+    <p>
+      Gemeinsam mit Nicole Stöcker habe ich den <strong>OrganisationsZoo</strong> ins Deutsche übersetzt 
+      und vertrete ihn als Botschafter in Europa. 
+      Die Tiermetaphern sind für mich ein wirkungsvolles Instrument, 
+      um komplexe Zusammenhänge in Führung und Teamarbeit greifbar zu machen.
+    </p>
+
+    <h2>Fun Facts</h2>
+    <div class="funfacts">
+      <span>🚐 Wohnmobil-Fan</span>
+      <span>🏍️ Motorradfahrer</span>
+      <span>✈️ UL-Pilot</span>
+      <span>📚 Autor</span>
+      <span>🌍 Mehrsprachig</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;">
+    <a href="index.html#team" class="back-link">← Zurück zum Team</a>
+  </div>
+</body>
+</html>
+

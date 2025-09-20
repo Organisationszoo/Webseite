@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Simon Bertogg – OrganisationsZoo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* ===== Farb-Design ===== */
+    :root {
+      --brand:#E44A00;
+      --bg:#ffffff;
+      --text:#111111;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --shadow:0 6px 18px rgba(0,0,0,.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:#0b0b0f;
+        --text:#e5e7eb;
+        --muted:#9ca3af;
+        --card:#111318;
+        --border:#1f2430;
+        --shadow:0 6px 18px rgba(0,0,0,.45);
+      }
+    }
+
+    /* ===== Basis ===== */
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font:16px/1.6 system-ui, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    img { max-width:100%; display:block; }
+    h1,h2,h3 { margin-top:0; }
+
+    /* ===== Profil Header ===== */
+    .profile-header {
+      text-align:center;
+      background:var(--card);
+      padding:2.5rem 1rem 2rem;
+      border-bottom:4px solid var(--brand);
+      box-shadow:var(--shadow);
+    }
+    .profile-header img {
+      border-radius:50%;
+      width:160px; height:160px;
+      object-fit:cover;
+      margin-bottom:1rem;
+      box-shadow:0 4px 12px rgba(0,0,0,.15);
+    }
+    .profile-header h1 {
+      font-size:clamp(1.6rem,1.2rem + 2vw,2.2rem);
+      margin:.2rem 0;
+    }
+    .profile-header p {
+      margin:0;
+      color:var(--muted);
+      font-size:1rem;
+    }
+
+    /* ===== Profil Inhalt ===== */
+    .profile-content {
+      max-width:800px;
+      margin:2rem auto;
+      padding:1.5rem;
+      background:var(--card);
+      border-radius:12px;
+      box-shadow:var(--shadow);
+    }
+    .profile-content h2 {
+      color:var(--brand);
+      margin-bottom:.6rem;
+      font-size:1.3rem;
+    }
+    .profile-content p { margin-bottom:1.2rem; }
+
+    /* ===== Zitatbox ===== */
+    .quote {
+      border-left:4px solid var(--brand);
+      padding-left:1rem;
+      margin:1.5rem 0;
+      font-style:italic;
+      color:var(--muted);
+    }
+
+    /* ===== Fun Facts ===== */
+    .funfacts {
+      display:flex;
+      flex-wrap:wrap;
+      gap:.8rem;
+      margin-top:1.5rem;
+    }
+    .funfacts span {
+      background:color-mix(in srgb, var(--brand) 12%, transparent);
+      color:var(--brand);
+      padding:.4rem .8rem;
+      border-radius:999px;
+      font-size:.9rem;
+      font-weight:600;
+    }
+
+    /* ===== Zurück-Link ===== */
+    .back-link {
+      display:inline-block;
+      margin:2rem auto;
+      padding:.8rem 1.4rem;
+      background:var(--brand);
+      color:#fff;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      transition:background .3s;
+    }
+    .back-link:hover { background:#c53d00; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="profile-header">
+    <img src="assets/team-simon.jpg" alt="Simon Bertogg">
+    <h1>Simon Bertogg 🐒</h1>
+    <p>Teamleiter & OrganisationsZoo-Anwender</p>
+  </div>
+
+  <!-- Inhalt -->
+  <div class="profile-content">
+    <h2>Mein Weg</h2>
+    <p>
+      Mit 18 Jahren habe ich mein erstes Praktikum im Behindertenbereich gestartet – 
+      und sofort gemerkt: Diese Arbeit erfüllt mich und macht mir grosse Freude.
+    </p>
+    <p>
+      Mit 24 Jahren schloss ich die Ausbildung zum Fachmann Betreuung ab. 
+      Danach habe ich viele Weiterbildungen besucht, unter anderem in 
+      <em>Unterstützte Kommunikation (z. B. mit Piktogrammen)</em> 
+      und im Umgang mit <em>herausforderndem Verhalten</em>.
+    </p>
+    <p>
+      Seit fast 18 Jahren arbeite ich in der <strong>arwo Stiftung in Wettingen</strong>. 
+      Viele Jahre war ich als Betreuer tätig, danach als stellvertretender Teamleiter. 
+      Heute leite ich ein Team – eine Aufgabe, die mir sehr viel Spass macht. 
+      Parallel dazu habe ich die Weiterbildung zum Teamleiter erfolgreich abgeschlossen.
+    </p>
+
+    <h2>Privates</h2>
+    <p>
+      In meiner Freizeit unternehme ich gerne etwas mit Freunden, gehe wandern 
+      oder verbringe Ferien am Meer. Ausserdem singe ich mit Begeisterung im Chor.
+    </p>
+
+    <h2>Arbeiten mit dem OrganisationsZoo</h2>
+    <p>
+      Als Teamleiter setze ich den <strong>OrganisationsZoo</strong> gezielt ein. 
+      Mit Hilfe der Tier-Metaphern lassen sich die <strong>Stärken und Entwicklungsfelder</strong> 
+      meiner Teammitglieder klarer erkennen und auf eine wertschätzende Weise ansprechen.
+    </p>
+    <p>
+      Besonders beim Feedback ist es einfacher, tierische Verhaltensweisen zu spiegeln, 
+      als Kritik direkt zu äussern. So konnten wir unsere <strong>Teamstabilität festigen</strong> 
+      und eine offene Feedbackkultur entwickeln.
+    </p>
+
+    <div class="quote">
+      „Es ist einfacher, Feedback über Tiere zu geben – 
+      als Kritik direkt zu formulieren.“
+    </div>
+
+    <h2>Fun Facts</h2>
+    <div class="funfacts">
+      <span>🌊 Liebt das Meer</span>
+      <span>🎶 Sänger im Chor</span>
+      <span>🚶‍♂️ Wandert gern</span>
+      <span>🤝 Teamplayer</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;">
+    <a href="index.html#team" class="back-link">← Zurück zum Team</a>
+  </div>
+</body>
+</html>
+
